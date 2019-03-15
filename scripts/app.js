@@ -4,20 +4,15 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', [
-  //'ionic',
-//  'ngRoute',
 		'ui.router',
   	'ngAnimate',
-  //	'mgcrea.ngStrap',
   	'ui.bootstrap',
-//  	'ng-datalist',
   	'ui-notification',
   	'app.homeState',
   	'app.searchState',
   	'app.aboutState',
   	'app.locations',
-  	'app.api',
-  	'restlet.sdk'
+  	'app.api'
 	])
   .config(function($sceDelegateProvider){
     $sceDelegateProvider.resourceUrlWhitelist([
@@ -32,8 +27,6 @@ angular.module('starter', [
 
       $state.get('about').error = { code: 123, description: 'Exception stack trace' }
       return $state.go('about');
-    });
-    //console.log("going to state:home");
-    //$state.transitionTo("home");    
+    }); 
   });
 

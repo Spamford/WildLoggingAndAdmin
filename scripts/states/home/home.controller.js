@@ -85,7 +85,7 @@
       //    2. location
       //    3. date
       //    4. living thing reference UUID
-      // 3. push to restlet
+      // 3. push to db
       // 4. fail?
       // 5. logging feedback
       //    1. postcode

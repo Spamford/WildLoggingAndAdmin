@@ -5,7 +5,7 @@
   'use strict';
 
   angular
-    .module('app.api', [ 'restlet.sdk' ])
+    .module('app.api', [])
     .factory('speciesSrvc', speciesSrvc)
     .factory('sightingsSrvc', sightingsSrvc)
   ;
@@ -20,21 +20,18 @@
     '$q',
     '$timeout',
     '$sce',
-    '$http',
-    'theurbanwild'
+    '$http'
   ];
   function speciesSrvc(
     $q,
     $timeout,
     $sce,
-    $http,
-    theurbanwild
+    $http
   ) {
     var service = {};
 
-    service.baseRestletURL = "https://theurbanwild.restlet.net/v1/";
+    service.baseDbUrl = "https://urbanwilddbapi.herokuapp.com/";
 
-    theurbanwild.configureHTTP_BASICAuthentication( window.urbanwildcredentials.restlet.user, window.urbanwildcredentials.restlet.pass );
 
     // methods as per https://trello.com/c/3sLYXMgq/64-species-service
 
@@ -74,20 +71,23 @@
     };
 
     service.getRegisteredSpecies = function getRegisteredSpecies( speciesName ) {
-      var endpointUri = service.baseRestletURL + "things/?name="+encodeURIComponent( speciesName );
+      var endpointUri = service.baseDbUrl + "things/?name="+encodeURIComponent( speciesName );
       return($http({method:"GET",url:endpointUri}));
     };
 
     service.getSpeciesFromId = function getSpeciesFromId( idString ) {
-      var endpointUri = service.baseRestletURL + "things/" + idString;
+      var endpointUri = service.baseDbUrl + "things/" + idString;
       return($http({method:"GET",url:endpointUri}));
     };
 
     // inserts a species based on name. Should not create duplicate ites
     service.registerSpecies = function registerSpecies( speciesName ) {
       var registerSpeciesDoesNotExist = function registerSpeciesDoesNotExist( error ) {
-        return theurbanwild.postThings({
-          "name": speciesName
+
+        var endpointUri = service.baseDbUrl + "things/"
+
+        return $http.post(endpointUri, {
+          name: speciesName
         }).then(
           function registerSpeciesFinal( data ) {
             console.log("registerSpecies: created a new ", speciesName );
@@ -128,18 +128,14 @@
 /*    '$ionicPlatform', */
     '$q',
     '$timeout',
-    '$http',
-    'theurbanwild'
+    '$http'
   ];
   function sightingsSrvc(
     $q,
     $timeout,
-    $http,
-    theurbanwild
+    $http
   ) {
     var service = {};
-
-    service.baseRestletURL = "https://theurbanwild.restlet.net/v1/";
 
     service.getSightings = function getSightings( postcode, dateFrom, dateTo, thingsReference ) {
       // sightings are 'events'
@@ -164,7 +160,7 @@
         parameters = addParameter( parameters, "thing", thingsReference );
       }
 
-      var endpointUri = service.baseRestletURL + "events/?"+parameters;
+      var endpointUri = service.baseDbUrl + "things/"
 
       //console.log( "sightingsSrvc.getSightings: getting  "+endpointUri );
 
@@ -186,7 +182,8 @@
         event.thing = thingsReference;
       }
       //console.log( "sightingsSrvc.registerSighting registering ", event );
-      return theurbanwild.postEvents( event );
+      var endpointUri = service.baseDbUrl + "events/"
+      return $http.post(endpointUri, event);
     };
 
     // standardises a postcode for data storage
