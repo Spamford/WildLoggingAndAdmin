@@ -70,12 +70,12 @@
       }
       if(requestUrl !== "" ) {
         $http.get( requestUrl )
-          .success(function (data, status, headers, config ) {
+          .then(
+           function success(data, status, headers, config ) {
             defer.resolve( data );
-          })
-          .error(function ( data, status, headers, config ) {
+          },
+          function error ( data, status, headers, config ) {
             throw new Error( status );
-            //defer.reject( status );
           });
         return defer.promise;
       };
@@ -111,14 +111,15 @@
       }
       if( requestUrl !== "" ) {
         $http.get( requestUrl )
-          .success(function ( data, status, headers, config ) {
+          .then(
+          function success( data, status, headers, config ) {
             //console.log( "locationsSrvc.getLocation:", data );
             defer.resolve( data )
-          } )
-          .error( function ( data, status, headers, config ) {
+          },
+          function error( data, status, headers, config ) {
             throw new Error( status );
             defer.reject( status );
-          } );
+          });
         return defer.promise;
       }
       throw new Error( service.BAD_POSTCODE );
