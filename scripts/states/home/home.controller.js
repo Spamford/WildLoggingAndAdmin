@@ -93,7 +93,7 @@
       //    3. date
       var livingThing = speciesSrvc.registerSpecies( vm.species ).then( // 1.
         function registeredSpeciesOk( confirmedLivingThing ) {
-          console.log("registerSpecies - got confirmedLivingThing", confirmedLivingThing);
+          console.log(confirmedLivingThing);
           sightingsSrvc.registerSighting( // 2.1 -> 2.4, 3
             vm.postcode,
             vm.location,

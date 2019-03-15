@@ -5,7 +5,7 @@
   'use strict';
 
   angular
-    .module('app.api', [])
+    .module('app.api', [ 'restlet.sdk' ])
     .factory('speciesSrvc', speciesSrvc)
     .factory('sightingsSrvc', sightingsSrvc)
   ;
@@ -20,17 +20,21 @@
     '$q',
     '$timeout',
     '$sce',
-    '$http'
+    '$http',
+    'theurbanwild'
   ];
   function speciesSrvc(
     $q,
     $timeout,
     $sce,
-    $http
+    $http,
+    theurbanwild
   ) {
     var service = {};
 
-    service.baseApiURL = "https://urbanwilddbapi.herokuapp.com/";
+    service.baseRestletURL = "https://theurbanwild.restlet.net/v1/";
+
+    theurbanwild.configureHTTP_BASICAuthentication( window.urbanwildcredentials.restlet.user, window.urbanwildcredentials.restlet.pass );
 
     // methods as per https://trello.com/c/3sLYXMgq/64-species-service
 
@@ -70,37 +74,30 @@
     };
 
     service.getRegisteredSpecies = function getRegisteredSpecies( speciesName ) {
-      var endpointUri = service.baseApiURL + "things/?name="+encodeURIComponent( speciesName );
+      var endpointUri = service.baseRestletURL + "things/?name="+encodeURIComponent( speciesName );
       return($http({method:"GET",url:endpointUri}));
     };
 
     service.getSpeciesFromId = function getSpeciesFromId( idString ) {
-      var endpointUri = service.baseApiURL + "things/" + idString;
+      var endpointUri = service.baseRestletURL + "things/" + idString;
       return($http({method:"GET",url:endpointUri}));
     };
 
     // inserts a species based on name. Should not create duplicate ites
     service.registerSpecies = function registerSpecies( speciesName ) {
       var registerSpeciesDoesNotExist = function registerSpeciesDoesNotExist( error ) {
-        var endpointUri = service.baseApiURL + "things/";
-        return($http({
-          method:"POST",
-          url:endpointUri,
-          headers:{},
-          data:{
-            'name': speciesName
-          }
+        return theurbanwild.postThings({
+          "name": speciesName
         }).then(
           function registerSpeciesFinal( data ) {
             console.log("registerSpecies: created a new ", speciesName );
-            // this used to return the species name in data.data but no longer
-            return /*speciesName; //*/data.data;
+            return data.data;
           },
           function registerSpeciesFinalError( error ) {
             console.log( "registerSpeciesFinalError: ", error );
             return error;
           }
-        ));
+        );
       };
 
       return(
@@ -131,16 +128,18 @@
 /*    '$ionicPlatform', */
     '$q',
     '$timeout',
-    '$http'
+    '$http',
+    'theurbanwild'
   ];
   function sightingsSrvc(
     $q,
     $timeout,
-    $http
+    $http,
+    theurbanwild
   ) {
     var service = {};
 
-    service.baseApiURL = "https://urbanwilddbapi.herokuapp.com/";
+    service.baseRestletURL = "https://theurbanwild.restlet.net/v1/";
 
     service.getSightings = function getSightings( postcode, dateFrom, dateTo, thingsReference ) {
       // sightings are 'events'
@@ -165,7 +164,9 @@
         parameters = addParameter( parameters, "thing", thingsReference );
       }
 
-      var endpointUri = service.baseApiURL + "events/?"+parameters;
+      var endpointUri = service.baseRestletURL + "events/?"+parameters;
+
+      //console.log( "sightingsSrvc.getSightings: getting  "+endpointUri );
 
       return($http({method:"GET",url:endpointUri}));
     };
@@ -184,29 +185,8 @@
       if( angular.isDefined( thingsReference ) ) {
         event.thing = thingsReference;
       }
-      console.log( "sightingsSrvc.registerSighting registering ", event );
-
-      var endpointUri = service.baseApiURL + "events/";
-      return $http({
-        method:"POST",
-        url:endpointUri,
-        headers:{},
-        data: event
-      });
-    };
-
-    service.deleteSighting = function( ref ) {
-      console.log("api.service.js:sightingSrvc.deleteSighting", ref);
-
-      var endpointUri = service.baseApiURL + "events/" + ref;
-      return $http({
-        method:"DELETE",
-        url:endpointUri,
-        headers:{
-          'Authorization':'Bearer '+localStorage.getItem("accessToken")
-        },
-      });
-
+      //console.log( "sightingsSrvc.registerSighting registering ", event );
+      return theurbanwild.postEvents( event );
     };
 
     // standardises a postcode for data storage
