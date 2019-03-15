@@ -218,7 +218,7 @@
                 "lat":results.data.result[0].latitude,
                 "lon": results.data.result[0].longitude
               };
-              vm.maybeSetPostcodeToHere( results.result[0].postcode );
+              vm.maybeSetPostcodeToHere( results.data.result[0].postcode );
             },
             function errorPostcodeFromPosition( error ) {
               console.log(error);
