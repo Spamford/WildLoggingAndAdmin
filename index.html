@@ -1,0 +1,87 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>The Urban Wild</title>
+
+    <link rel="manifest" href="manifest.json">
+
+
+    <link href="css/style.css" rel="stylesheet"/>
+
+    <!-- bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <!-- angularjs js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.7/angular-animate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.22/angular-ui-router.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.7.8/angular-locale_en-gb.js"></script>
+ 
+    <!-- Leaflet! https://leafletjs.com/download.html -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+
+    <!-- Leaflet MarkerCluster! https://cdnjs.com/libraries/leaflet.markercluster-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster-src.js"></script>
+
+    <!-- Auth0 -->
+    <script src="https://cdn.auth0.com/js/auth0/9.10.0/auth0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-auth0/3.0.1/angular-auth0.js"></script>
+
+    <!-- your app's js -->
+    <script src="scripts/app.js"></script>
+
+    <!-- angularjs-toaster -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/3.0.0/toaster.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-toaster/3.0.0/toaster.js"></script>
+
+    <!-- directives -->
+    <script src="scripts/directives/connectionError.directive.js"></script>
+
+    <script src="auth0-variables.js"></script>
+    <script src='scripts/services/authentication.service.js'></script>
+    <script src='scripts/services/authenticationNotify.service.js'></script>
+
+    <!-- modules and services -->
+    <script src="scripts/services/locations.service.js"></script>
+    <script src="scripts/services/api.service.js"></script>
+
+    <script src="scripts/states/home/home.module.js"></script>
+    <script src="scripts/states/home/home.controller.js"></script>
+
+    <script src="scripts/states/search/search.module.js"></script>
+    <script src="scripts/states/search/search.controller.js"></script>
+
+    <script src="scripts/states/about/about.module.js"></script>
+    <script src="scripts/states/about/about.controller.js"></script>
+
+    <script src="scripts/states/admin/admin.module.js" ></script>
+    <script src="scripts/states/admin/admin.controller.js" ></script>
+
+    <!-- angular-ui-notification -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-notification/0.3.6/angular-ui-notification.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-notification/0.3.6/angular-ui-notification.css"/>
+
+  </head>
+  <body ng-app="starter">
+    <connectionerror show="vm.errorModalShow">
+      modal connection error window
+      {{vm.errorModalText}}
+    </connectionerror>
+
+    <toaster-container></toaster-container>
+
+    <ui-view></ui-view>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<uiview>
+  <div id="header" class="bar-dark">
+    <button class="button button-icon icon ion-navicon" menu-toggle="left" ng-click="vm.goHome()">❝</button>
+    <h1 class="title">Wild Logging - <a sref="/admin">Admin</a></h1>
+    <button class="button button-icon icon ion-arrow-right-c">
+      <div ng-if='!vm.isAuthenticated===true'>
+        <md-button class="md-raised small" ng-click='vm.login()'>in</md-button>
+      </div>
+      <div ng-if='vm.isAuthenticated===true'>
+        <md-button class="md-raised small" ng-click="vm.logout()">out</md-button>
+      </div>
+    </button>
+  </div>
+
+  <div class="admin-page home-page">
+    <div ng-if='vm.isAuthenticated===true'>
+      <h2>Urban Wild: Administration</h2>
+      <p>Choose an item to administer from the options below</p>
+      <ion-list>
+        <ion-item ng-click="vm.admin('events');">Events</ion-item>
+      </ion-list>
+    </div>
+    <div ng-if='vm.isAuthenticated!==true'>
+      <h2>Please authenticate.</h2>
+      <p>Use the icon in the <span ng-click="vm.login()">top right</span> to authenticate.</p>
+  </div>
+</uiview>
