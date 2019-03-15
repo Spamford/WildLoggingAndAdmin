@@ -215,8 +215,8 @@
             function gotPostcodeFromPosition( results ) {
               // postcode is in result.postcode
               vm.location = {
-                "lat":results.result[0].latitude,
-                "lon": results.result[0].longitude
+                "lat":results.data.result[0].latitude,
+                "lon": results.data.result[0].longitude
               };
               vm.maybeSetPostcodeToHere( results.result[0].postcode );
             },
