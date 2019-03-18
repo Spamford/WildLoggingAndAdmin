@@ -31,23 +31,27 @@
     var service = {};
 
     service.baseDbUrl = "https://urbanwilddbapi.herokuapp.com/";
+    service.corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
+    service.speciesApiUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch"
 
 
     // methods as per https://trello.com/c/3sLYXMgq/64-species-service
 
     service.getSuggestedSpeciesNames = function getSuggestedSpeciesNames( searchTerms ) {
       var defer = $q.defer();
-      var requestUrl = "";
       var params = null;
+      var requestUrl = null;
+  
       var cleanedSearchTerms = searchTerms.replace(/[^a-zA-Z0-9 :]/g, ''); // regex out all non alphanumeric characters
 
       if( cleanedSearchTerms.length>0 ) {
         // https://stackoverflow.com/questions/42706549/angular-1-6-3-is-not-allowing-a-jsonp-request-that-was-allowed-in-1-5-8
-        requestUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch";
-        params = {srchKey:cleanedSearchTerms};
+
+        var params = "srchKey=" + cleanedSearchTerms;
+        var requestUrl = service.corsProxyUrl + speciesApiUrl + "?" + params;
       }
       if( params ) {
-        return $http.jsonp( requestUrl , {params:params} )
+        return $http.get( requestUrl )
           .then(
             function response(data, status, headers, config ) {
               var names = data.data.anyMatchList.map(function(item,index){
