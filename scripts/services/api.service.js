@@ -41,7 +41,8 @@
       var cleanedSearchTerms = searchTerms.replace(/[^a-zA-Z0-9 :]/g, ''); // regex out all non alphanumeric characters
 
       if( cleanedSearchTerms.length>0 ) {
-        requestUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch?jsonP=JSON_CALLBACK&srchKey=" + cleanedSearchTerms;
+        // https://stackoverflow.com/questions/42706549/angular-1-6-3-is-not-allowing-a-jsonp-request-that-was-allowed-in-1-5-8
+        requestUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch?srchKey=" + cleanedSearchTerms;
       }
       if( requestUrl !== "" ) {
         return $http.jsonp( requestUrl , { jsonpCallbackParam: "JSON_CALLBACK" } )
