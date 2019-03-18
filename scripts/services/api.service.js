@@ -43,7 +43,7 @@
 
       if( cleanedSearchTerms.length>0 ) {
         // https://stackoverflow.com/questions/42706549/angular-1-6-3-is-not-allowing-a-jsonp-request-that-was-allowed-in-1-5-8
-        requestUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch" + cleanedSearchTerms;
+        requestUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch";
         params = {srchKey:cleanedSearchTerms};
       }
       if( params ) {
