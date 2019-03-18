@@ -45,7 +45,7 @@
         requestUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch?srchKey=" + cleanedSearchTerms;
       }
       if( requestUrl !== "" ) {
-        return $http.jsonp( requestUrl , { jsonpCallbackParam: "JSON_CALLBACK" } )
+        return $http.get( requestUrl)
           .then(
             function response(data, status, headers, config ) {
               var names = data.data.anyMatchList.map(function(item,index){
