@@ -14,11 +14,26 @@ angular.module('starter', [
   	'app.locations',
   	'app.api'
 	])
-  .config(function($sceDelegateProvider){
+  .config(function(
+    $sceDelegateProvider,
+    $locationProvider
+    ){
+
+
+
+
     $sceDelegateProvider.resourceUrlWhitelist([
       'self',
       "https://www.itis.gov/**"
     ]);
+
+    $locationProvider.hashPrefix('');
+
+    /// Comment out the line below to run the app
+    // without HTML5 mode (will use hashes in routes)
+    $locationProvider.html5Mode(true);
+
+
   })
   .run(function($state, $rootScope, Notification) {
 
