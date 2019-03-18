@@ -48,7 +48,7 @@
         // https://stackoverflow.com/questions/42706549/angular-1-6-3-is-not-allowing-a-jsonp-request-that-was-allowed-in-1-5-8
 
         var params = "srchKey=" + cleanedSearchTerms;
-        var requestUrl = service.corsProxyUrl + speciesApiUrl + "?" + params;
+        var requestUrl = service.corsProxyUrl + service.speciesApiUrl + "?" + params;
       }
       if( params ) {
         return $http.get( requestUrl )
