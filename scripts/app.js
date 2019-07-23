@@ -14,7 +14,7 @@ angular.module('starter', [
   	'app.locations',
     'app.api',
     'app.loginState',
-
+    'app.adminState'
 	])
   .config(function(
     $sceDelegateProvider,

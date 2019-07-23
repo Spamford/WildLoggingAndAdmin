@@ -1,0 +1,14 @@
+<ui-view>
+    <h3 style="text-align: center;">Delete {{vm.title}}</h3>
+    <div class="container-fluid">
+        <input ng-model="vm.searchStr" type="text" class="form-control" placeholder="Name of {{vm.title}}" aria-label="Search" aria-describedby="button-addon2">
+        <div class="list-group">
+            <label style="cursor: pointer;" class="list-group-item" ng-repeat="entity in vm.entities | filter:vm.searchStr">
+                <input style="margin-right: 20px;" type="checkbox" ng-checked="vm.selectedEntities.indexOf(entity) > -1" ng-click="vm.toggleSelection(entity)">
+                <span ng-show="vm.showName" >{{entity.name}}</span>
+                <span ng-show="vm.showPostcode" >{{entity.postcode}}</span>
+            </label>
+        </div>
+    </div>
+    <button style="position: fixed; left: 50vw; bottom: 10px; transform: translateX(-50%); padding: 20px 50px;" class="btn btn-lg btn-danger">Delete</button>
+</ui-view>

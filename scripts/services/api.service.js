@@ -77,6 +77,13 @@
       }
     };
 
+    service.getAllRegisteredSpecies = function getAllRegisteredSpecies() {
+      return($http({
+        method: "GET",
+        url: service.baseDbUrl + "things/"
+      }));
+    }
+
     service.getRegisteredSpecies = function getRegisteredSpecies( speciesName ) {
       var endpointUri = service.baseDbUrl + "things/?name="+encodeURIComponent( speciesName );
       return($http({method:"GET",url:endpointUri}));
@@ -125,6 +132,16 @@
     return service;
   }
 
+
+
+
+
+
+
+
+
+
+  
   //
   //
   // sightingsSrvc
@@ -142,7 +159,17 @@
     $timeout,
     $http
   ) {
+
     var service = {};
+
+    service.baseDbUrl = "https://urbanwilddbapi.herokuapp.com/";
+
+    service.getAllRegisteredSightings = function getAllRegisteredSightings () {
+      return($http({
+        method: "GET",
+        url: service.baseDbUrl + "events/"
+      }));
+    }
 
     service.getSightings = function getSightings( postcode, dateFrom, dateTo, thingsReference ) {
       // sightings are 'events'
