@@ -1,4 +1,9 @@
 /* Empty. Add your own CSS if you like */
+
+a {
+  cursor: pointer;
+}
+
 div#header {
 	width:100%;
 	height:3em;
@@ -98,7 +103,8 @@ div.buttons {
 		border-radius: 8px;
 		border-style: solid;
 		xmargin: 0 20px;
-	}
+  }
+  
 
 table.species-cluster {
 
