@@ -63,6 +63,10 @@
       $state.go('about');
     };
 
+    vm.goLogin = function(){
+      $state.go('login');
+    };
+
     vm.getLocation = function() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);

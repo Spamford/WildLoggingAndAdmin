@@ -22,7 +22,23 @@
 	    console.log("go home!");
       $state.go('home');
     }
+
+    vm.goSearch = function() {
+      console.log("go search!");
+      $state.go('search');
+    };
+
+    vm.goAbout = function() {
+      console.log("go about!");
+      $state.go('about');
+    };
+
+    vm.goLogin = function(){
+      console.log("go login!");
+      $state.go('login');
+    };
+   
 		return vm;
-	}
+  }
 		
 })();

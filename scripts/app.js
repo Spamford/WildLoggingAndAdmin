@@ -7,12 +7,14 @@ angular.module('starter', [
 		'ui.router',
   	'ngAnimate',
   	'ui.bootstrap',
-  	'ui-notification',
-  	'app.homeState',
+    'ui-notification',
+    'app.homeState',
   	'app.searchState',
   	'app.aboutState',
   	'app.locations',
-  	'app.api'
+    'app.api',
+    'app.loginState',
+
 	])
   .config(function(
     $sceDelegateProvider,
