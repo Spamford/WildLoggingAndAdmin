@@ -3,12 +3,15 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      <a class="navbar-brand" href="#">Wild Logging</a>
+      <a class="navbar-brand" ng-click="vm.goHome()" style="color: #fff">Wild Logging</a>
       
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item ">
-            <a class="nav-link" ng-click="vm.goLogin()">Login</a>
+            <a class="nav-link active" ng-click="vm.goHome()">Home </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" ng-click="vm.goLogin()">Login </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" ng-click="vm.goAbout()">About</a>
