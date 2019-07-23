@@ -35,10 +35,10 @@ div#footer {
 	bottom:0;
 	background-color:silver;
 	padding:4px;
-	z-index:10;
+	z-index:10000;
 }
 
-uiview {
+.map-ui-view {
 	top:0;
 	bottom:0;
 	left:0;
@@ -46,7 +46,7 @@ uiview {
 	position:fixed;
 }
 
-uiview>div {
+.navbar {
 	z-index:1;
 }
 

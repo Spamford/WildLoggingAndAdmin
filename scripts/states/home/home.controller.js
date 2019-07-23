@@ -55,18 +55,6 @@
       console.log("vm.setform - got ",f);
     };
 
-    vm.goSearch = function() {
-      $state.go('search');
-    };
-
-    vm.goAbout = function() {
-      $state.go('about');
-    };
-
-    vm.goLogin = function(){
-      $state.go('login');
-    };
-
     vm.getLocation = function() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);

@@ -2,11 +2,9 @@
 
     'use strict';
 
-    var app = angular.module('app.adminState', [
+    var app = angular.module('app.adminState', []);
 
-    ]);
-
-    app.config(function ($stateProvider, $urlRouterProvider) {
+    app.config(function ($stateProvider) {
 
         $stateProvider.state('admin', {
             url: '/admin',
@@ -24,7 +22,6 @@
                 registeredEntities: function($q, $stateParams, speciesSrvc, sightingsSrvc) {
 
                     let entity = $stateParams.entity;
-                    console.log(entity);
                     var promiseObj = $q.defer();
 
                     if (entity === "species") {
@@ -57,8 +54,6 @@
                 }
             }
         });
-
-        $urlRouterProvider.otherwise('home');
 
     });
 

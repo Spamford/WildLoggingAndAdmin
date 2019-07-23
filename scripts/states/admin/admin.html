@@ -1,11 +1,4 @@
-<ui-view>
-    <div id="header" class="bar-dark">
-        <button class="button button-icon icon ion-navicon" menu-toggle="left" ng-click="vm.goAbout()">❝</button>
-        <h1 class="title">Wild Logging</h1>
-        <button class="button button-icon icon ion-arrow-right-c" ng-click="vm.goSearch()">→</button>
-    </div>
-    <div style="width: 300px; height: 200px; position: absolute; top: 50vh; left: 50vw; transform: translate(-50%, -50%);">
-        <button ng-click="vm.goAdminSpecies()" style="background: none; border: none; background-color: #333333; color: white; width: 300px; height: 100px; font-size: 2em; margin-bottom:10px">Administer Logged Species</button>
-        <button ng-click="vm.goAdminSightings()" style="background: none; border: none; background-color: #333333; color: white; width: 300px; height: 100px; font-size: 2em;">Administer Logged Sightings</button>
-    </div>
-</ui-view>
+<div style="width: 300px; height: 200px; position: absolute; top: 50vh; left: 50vw; transform: translate(-50%, -50%);">
+  <button ng-click="vm.goAdminSpecies()" style="background: none; border: none; background-color: #333333; color: white; width: 300px; height: 100px; font-size: 2em; margin-bottom:10px">Administer Logged Species</button>
+  <button ng-click="vm.goAdminSightings()" style="background: none; border: none; background-color: #333333; color: white; width: 300px; height: 100px; font-size: 2em;">Administer Logged Sightings</button>
+</div>
