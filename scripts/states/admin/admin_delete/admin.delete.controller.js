@@ -8,12 +8,18 @@
 
   adminDelCtrl.$inject = [
     '$state',
+    '$q',
+    'speciesSrvc',
+    'sightingsSrvc',
     // from state resolve
     'registeredEntities'
   ];
 
   function adminDelCtrl(
     $state,
+    $q,
+    speciesSrvc,
+    sightingsSrvc,
     registeredEntities
   ) {
 
@@ -46,6 +52,40 @@
         vm.selectedEntities.push(entity);
         console.debug(`${vm.selectedEntities.length} entities currently selected.`);
       }
+    }
+
+
+    vm.deleteSelectedEntities = function deleteSelectedEntities() {
+      deleteEntities().then(
+        function success(response) {
+          console.log("DELETE Successful : ", response);
+        },
+        function failure(error) {
+          console.log("Oh no something went wrong... :) -> ", error);
+        }
+      );
+    }
+
+    function deleteEntities() {
+
+      let promiseObj = $q.defer();
+      let promiseArray = [];
+
+      if (vm.showName) { // if on the delete species page
+        for (let i = 0; i < vm.selectedEntities.length; i++) {
+          promiseArray.push(speciesSrvc.deleteSpecies(vm.selectedEntities[i].id));
+        }
+      } else if (vm.showPostcode) { // if on the delete sightings page
+        for (let i = 0; i < vm.selectedEntities.length; i++) {
+          console.log(vm.selectedEntities[i].id);
+          promiseArray.push(sightingsSrvc.deleteSightings(vm.selectedEntities[i].id));
+        }
+      }
+
+      promiseObj.resolve($q.all(promiseArray));
+      promiseObj.reject(new Error("DELETE Failed"));
+
+      return promiseObj.promise;
     }
 
     return vm;

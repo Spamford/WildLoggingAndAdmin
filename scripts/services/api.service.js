@@ -129,7 +129,47 @@
         )
       );
     };
+
+    service.deleteSpecies = function deleteSpecies(speciesID) {
+      let promiseObj = $q.defer();
+
+      let getSightingsEndpointUri = service.baseDbUrl + "events/";
+      let getSightingsConfig = { params: { thing: speciesID } };
+
+      $http.get(getSightingsEndpointUri, getSightingsConfig).then( // Get the sightings associated with this species
+
+        function success(response) {
+
+          let promiseArray = [];
+          let sightingsOfThisSpecies = response.data;
+
+          for (let i = 0; i < sightingsOfThisSpecies.length; i++) {
+            let deleteSightingsEndpointUri = service.baseDbUrl + "events/" + sightingsOfThisSpecies[i].id;
+            let deleteSightingsRequestPromise = $http.delete(deleteSightingsEndpointUri, {});
+            promiseArray.push(deleteSightingsRequestPromise);
+          }
+
+          let deleteSpeciesEndpointUri = service.baseDbUrl + "things/" + speciesID;
+          let deleteSpeciesRequestPromise = $http.delete(deleteSpeciesEndpointUri, {});
+          promiseArray.push(deleteSpeciesRequestPromise);
+
+          promiseObj.resolve($q.all(promiseArray));
+
+        },
+
+        function failure(error) {
+          console.log(`Failed to delete species : ${speciesID}\nPlease check that the ID is correct.`);
+          promiseObj.reject(error)
+        }
+
+      );
+
+      return promiseObj.promise;
+
+    }
+
     return service;
+
   }
 
 
@@ -226,7 +266,13 @@
       return postcode;
     };
 
-    //
+    service.deleteSightings = function deleteSightings(sightingsID) {
+      return($http({
+        method: "DELETE",
+        url: service.baseDbUrl + "events/" + sightingsID
+      }));
+    }
+
     return service;
   }
 
