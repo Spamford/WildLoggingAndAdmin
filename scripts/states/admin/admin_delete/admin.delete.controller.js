@@ -46,11 +46,28 @@
         vm.selectedEntities.splice(index, 1);
         console.debug(`${vm.selectedEntities.length} entities currently selected.`);
       }
-      
+
       // Not in the array of selected entities. Add it to the array.
       else {
         vm.selectedEntities.push(entity);
         console.debug(`${vm.selectedEntities.length} entities currently selected.`);
+        var checkboxes = document.querySelectorAll('input.admin-check'),
+          checkall = document.getElementById('admin-check-all');
+        checkboxes.indeterminate = true;
+        for (var i = 0; i < checkboxes.length; i++) {
+          checkboxes[i].onclick = function () {
+            var checkedCount = document.querySelectorAll('input.admin-check:checked').length;
+
+            checkall.checked = checkedCount > 0;
+            checkall.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
+          }
+        }
+
+        checkall.onclick = function () {
+          for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = this.checked;
+          }
+        }
       }
     }
 
