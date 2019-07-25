@@ -37,13 +37,18 @@ angular.module('starter', [
 
 
   })
-  .run(function($state, $rootScope, Notification) {
+  .run(function($state, $rootScope, $transitions, Notification) {
 
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       event.preventDefault();
 
       $state.get('about').error = { code: 123, description: 'Exception stack trace' }
       return $state.go('about');
-    }); 
+    });
+
+    $transitions.onSuccess({}, function() {
+      $('.navbar-collapse').collapse('hide');
+    });
+
   });
 
