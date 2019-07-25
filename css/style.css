@@ -27,6 +27,10 @@
   padding: 20px 50px;
 }
 
+.admin-delete .form-check {
+  margin: 10px 0 10px 20px;
+}
+
 .admin-check {
   margin-right: 20px;
 }
