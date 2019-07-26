@@ -19,14 +19,6 @@
   text-align: center
 }
 
-.admin-delete button {
-  position: fixed;
-  left: 50vw;
-  bottom: 10px;
-  transform: translateX(-50%);
-  padding: 20px 50px;
-}
-
 .admin-delete .form-check {
   margin: 10px 0 10px 20px;
 }

@@ -14,5 +14,15 @@
             </label>
         </div>
     </div>
-    <button ng-click="vm.deleteSelectedEntities()" ng-disabled="!vm.selectedEntities.length" class="btn btn-lg btn-danger">Delete</button>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <button ng-disabled="vm.entities.length < vm.paginationSize" class="btn btn-primary btn-block">More</button>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <button ng-click="vm.deleteSelectedEntities()" ng-disabled="!vm.selectedEntities.length" class="btn btn-danger btn-block">Delete</button>
+            </div>
+        </div>
+    </div>
 </div>
