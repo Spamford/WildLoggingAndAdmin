@@ -96,6 +96,10 @@
       return promiseObj.promise;
     }
 
+    vm.getEntities = function getEntities(entityName) {
+      console.log(entityName);
+    }
+
     return vm;
 
   }

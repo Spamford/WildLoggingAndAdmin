@@ -1,0 +1,8 @@
+<!-- https://getbootstrap.com/docs/4.0/utilities/spacing/ -->
+<!-- mt = margin top,  - = syntax,  3 = middle value in range of sizes which equals the value of $spacer. -->
+<div class="input-group mt-3">
+    <input ng-model="vm.searchStr" type="text" class="form-control" placeholder="{{vm.placeholder}}" aria-label="{vm.placeholder}}" aria-describedby="admin-search-button">
+    <div class="input-group-append">
+        <button ng-click="vm.search(vm.searchStr)" class="btn btn-outline-secondary" type="button" id="admin-search-button">Search</button>
+    </div>
+</div>
