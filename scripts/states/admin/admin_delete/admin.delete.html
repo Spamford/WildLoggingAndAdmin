@@ -7,7 +7,7 @@
             <label for="admin-check-all" class="form-check-label">Select All</label>
         </div>
         <div class="list-group">
-            <label style="cursor: pointer;" class="list-group-item" ng-repeat="entity in vm.entities | filter:vm.searchStr">
+            <label style="cursor: pointer;" class="list-group-item" ng-repeat="entity in vm.entities">
                 <input class="admin-check" type="checkbox" ng-checked="vm.allSelected" ng-click="vm.toggleSelection(entity)">
                 <span ng-show="vm.showName">{{entity.name}}</span>
                 <span ng-show="vm.showPostcode">{{entity.postcode}}</span>
@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-lg-6">
-                <button ng-click="vm.getMoreEntities()" ng-disabled="vm.entities.length < vm.paginationSize" class="btn btn-primary btn-block">More</button>
+                <button ng-click="vm.getMoreEntities()" ng-disabled="vm.noMoreEntitiesToGet" class="btn btn-primary btn-block">More</button>
             </div>
             <div class="col-md-6 col-lg-6">
                 <button ng-click="vm.deleteSelectedEntities()" ng-disabled="!vm.selectedEntities.length" class="btn btn-danger btn-block">Delete</button>

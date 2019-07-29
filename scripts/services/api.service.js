@@ -84,11 +84,11 @@
       }));
     };
 
-    service.getSpeciesByName = function getEntitiesByName(speciesName, paginationSize, pageNum) {
+    service.getSpeciesByName = function getSpeciesByName(speciesName, pageSize, pageNum) {
         let endpointUri = service.baseDbUrl
-            + "things/?" + encodeURIComponent("$size") + "=" + encodeURIComponent( paginationSize )
+            + "things/?" + encodeURIComponent("$size") + "=" + encodeURIComponent( pageSize )
             + "&name=" + encodeURIComponent( speciesName )
-            + "&page=" + encodeURIComponent( pageNum );
+            + "&" + encodeURIComponent("$page") + "=" + encodeURIComponent( pageNum );
 
         return($http({
             method: "GET",
@@ -220,6 +220,18 @@
       return($http({
         method: "GET",
         url: service.baseDbUrl + "events/"
+      }));
+    }
+
+    service.getSightingsByName = function getSightingsByName(sightingsPostcode, pageSize, pageNum) {
+      let endpointUri = service.baseDbUrl
+          + "events/?" + encodeURIComponent("$size") + "=" + encodeURIComponent( pageSize )
+          + "&postcode=" + encodeURIComponent( sightingsPostcode )
+          + "&" + encodeURIComponent("$page") + "=" + encodeURIComponent( pageNum );
+
+      return($http({
+          method: "GET",
+          url: endpointUri
       }));
     }
 

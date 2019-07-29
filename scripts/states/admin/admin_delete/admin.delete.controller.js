@@ -10,17 +10,14 @@
     '$state',
     '$q',
     'speciesSrvc',
-    'sightingsSrvc',
-    // from state resolve
-    // 'registeredEntities'
+    'sightingsSrvc'
   ];
 
   function adminDelCtrl(
     $state,
     $q,
     speciesSrvc,
-    sightingsSrvc,
-    // registeredEntities
+    sightingsSrvc
   ) {
 
     function capitalize(str) {
@@ -31,13 +28,15 @@
       title: capitalize($state.params.entity),
       placeholderProperty: $state.params.entity === 'species' ? 'name' : 'postcode',
       searchStr: "",
-      paginationSize: 10,
+      lastSearch: "",
+      pageSize: 1,
+      nextPage: 1,
       entities: [],
       selectedEntities: [],
-      // exceedsPaginationSize: vm.entities.length > vm.paginationSize,
       showName: $state.params.entity === 'species',
       showPostcode: $state.params.entity === 'sightings',
-      allSelected: false
+      allSelected: false,
+      noMoreEntitiesToGet: true
     });
 
     vm.toggleSelection = function toggleSelection(entity) {
@@ -97,23 +96,54 @@
       return promiseObj.promise;
     }
 
-    vm.getEntities = function getEntities(queryParam) {
-      if (vm.showName) {
-        speciesSrvc.getSpeciesByName(queryParam).then(
-          function success(response) {
-            vm.entities = response.data;
-          },
-          function failure(error) {
-            console.log("Failed to get entities.", error);
-          }
-        );
-      } else if (vm.showPostcode) {
-        // TODO: Same as above but need to implement method in service.
+    vm.getEntities = function getEntities(searchStr) {
+
+      let entityFilter = searchStr.toLowerCase();
+
+      if (vm.lastSearch === entityFilter || entityFilter === "") {
+        vm.noMoreEntitiesToGet = false;
+        return;
+      } else {
+        vm.nextPage = 1;
       }
+
+      function successCallback(response) {
+        vm.lastSearch = entityFilter;
+        vm.noMoreEntitiesToGet = false;
+        vm.entities = response.data;
+        vm.nextPage++;
+      }
+
+      function failureCallback(error) {
+        console.log("Failed to get entities.", error);
+      }
+
+      if (vm.showName) {
+        speciesSrvc.getSpeciesByName(entityFilter, vm.pageSize, vm.nextPage).then(successCallback, failureCallback);
+      } else if (vm.showPostcode) {
+        sightingsSrvc.getSightingsByName(entityFilter, vm.pageSize, vm.nextPage).then(successCallback, failureCallback);
+      }
+
     }
 
     vm.getMoreEntities = function getMoreEntities() {
-        console.log("Getting more entities");
+
+      function successCallback(response) {
+        vm.entities.push(...response.data);
+        vm.nextPage++;
+        vm.noMoreEntitiesToGet = response.data.length === 0;
+      }
+
+      function failureCallback(error) {
+        console.log("Failed to get MORE entities...", error);
+      }
+
+      if (vm.showName) {
+        speciesSrvc.getSpeciesByName(vm.lastSearch, vm.pageSize, vm.nextPage).then(successCallback, failureCallback)
+      } else if (vm.showPostcode) {
+        sightingsSrvc.getSightingsByName(vm.lastSearch, vm.pageSize, vm.nextPage).then(successCallback, failureCallback);
+      }
+
     }
 
     return vm;
