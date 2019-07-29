@@ -18,41 +18,41 @@
             templateUrl: './scripts/states/admin/admin_delete/admin.delete.html',
             controller: 'adminDelCtrl as vm',
             cache: false,
-            resolve: {
-                registeredEntities: function($q, $stateParams, speciesSrvc, sightingsSrvc) {
+            // resolve: {
+            //     registeredEntities: function($q, $stateParams, speciesSrvc, sightingsSrvc) {
 
-                    let entity = $stateParams.entity;
-                    var promiseObj = $q.defer();
+            //         let entity = $stateParams.entity;
+            //         var promiseObj = $q.defer();
 
-                    if (entity === "species") {
+            //         if (entity === "species") {
 
-                        speciesSrvc.getAllRegisteredSpecies().then(
-                            function success(response) {
-                                promiseObj.resolve(response.data);
-                            },
-                            function failure(err) {
-                                promiseObj.reject(err);
-                            }
-                        );
+            //             speciesSrvc.getAllRegisteredSpecies().then(
+            //                 function success(response) {
+            //                     promiseObj.resolve(response.data);
+            //                 },
+            //                 function failure(err) {
+            //                     promiseObj.reject(err);
+            //                 }
+            //             );
 
-                    }
+            //         }
                     
-                    if (entity === "sightings") {
+            //         if (entity === "sightings") {
 
-                        sightingsSrvc.getAllRegisteredSightings().then(
-                            function success(response) {
-                                promiseObj.resolve(response.data);
-                            },
-                            function failure(err) {
-                                promiseObj.reject(err);
-                            }
-                        );
+            //             sightingsSrvc.getAllRegisteredSightings().then(
+            //                 function success(response) {
+            //                     promiseObj.resolve(response.data);
+            //                 },
+            //                 function failure(err) {
+            //                     promiseObj.reject(err);
+            //                 }
+            //             );
 
-                    }
+            //         }
 
-                    return promiseObj.promise;
-                }
-            }
+            //         return promiseObj.promise;
+            //     }
+            // }
         });
 
     });

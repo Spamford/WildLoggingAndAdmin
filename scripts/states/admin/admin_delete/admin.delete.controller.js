@@ -12,7 +12,7 @@
     'speciesSrvc',
     'sightingsSrvc',
     // from state resolve
-    'registeredEntities'
+    // 'registeredEntities'
   ];
 
   function adminDelCtrl(
@@ -20,7 +20,7 @@
     $q,
     speciesSrvc,
     sightingsSrvc,
-    registeredEntities
+    // registeredEntities
   ) {
 
     function capitalize(str) {
@@ -29,9 +29,10 @@
 
     var vm = angular.extend(this, {
       title: capitalize($state.params.entity),
+      placeholderProperty: $state.params.entity === 'species' ? 'name' : 'postcode',
       searchStr: "",
       paginationSize: 10,
-      entities: registeredEntities,
+      entities: [],
       selectedEntities: [],
       // exceedsPaginationSize: vm.entities.length > vm.paginationSize,
       showName: $state.params.entity === 'species',
@@ -96,8 +97,23 @@
       return promiseObj.promise;
     }
 
-    vm.getEntities = function getEntities(entityName) {
-      console.log(entityName);
+    vm.getEntities = function getEntities(queryParam) {
+      if (vm.showName) {
+        speciesSrvc.getSpeciesByName(queryParam).then(
+          function success(response) {
+            vm.entities = response.data;
+          },
+          function failure(error) {
+            console.log("Failed to get entities.", error);
+          }
+        );
+      } else if (vm.showPostcode) {
+        // TODO: Same as above but need to implement method in service.
+      }
+    }
+
+    vm.getMoreEntities = function getMoreEntities() {
+        console.log("Getting more entities");
     }
 
     return vm;

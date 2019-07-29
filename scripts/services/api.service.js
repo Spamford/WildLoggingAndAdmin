@@ -82,6 +82,18 @@
         method: "GET",
         url: service.baseDbUrl + "things/"
       }));
+    };
+
+    service.getSpeciesByName = function getEntitiesByName(speciesName, paginationSize, pageNum) {
+        let endpointUri = service.baseDbUrl
+            + "things/?" + encodeURIComponent("$size") + "=" + encodeURIComponent( paginationSize )
+            + "&name=" + encodeURIComponent( speciesName )
+            + "&page=" + encodeURIComponent( pageNum );
+
+        return($http({
+            method: "GET",
+            url: endpointUri
+        }));
     }
 
     service.getRegisteredSpecies = function getRegisteredSpecies( speciesName ) {
