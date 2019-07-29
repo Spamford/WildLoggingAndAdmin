@@ -36,7 +36,8 @@
       showName: $state.params.entity === 'species',
       showPostcode: $state.params.entity === 'sightings',
       allSelected: false,
-      noMoreEntitiesToGet: true
+      noMoreEntitiesToGet: true,
+      showSpinner: false
     });
 
     vm.toggleSelection = function toggleSelection(entity) {
@@ -64,11 +65,14 @@
 
 
     vm.deleteSelectedEntities = function deleteSelectedEntities() {
+      vm.showSpinner = true;
       deleteEntities().then(
         function success(response) {
+          vm.showSpinner = false;
           console.log("DELETE Successful : ", response);
         },
         function failure(error) {
+          vm.showSpinner = false;
           console.log("Oh no something went wrong... :) -> ", error);
         }
       );
@@ -112,15 +116,19 @@
         vm.noMoreEntitiesToGet = false;
         vm.entities = response.data;
         vm.nextPage++;
+        vm.showSpinner = false;
       }
 
       function failureCallback(error) {
         console.log("Failed to get entities.", error);
+        vm.showSpinner = false;
       }
 
       if (vm.showName) {
+        vm.showSpinner = true;
         speciesSrvc.getSpeciesByName(entityFilter, vm.pageSize, vm.nextPage).then(successCallback, failureCallback);
       } else if (vm.showPostcode) {
+        vm.showSpinner = true;
         sightingsSrvc.getSightingsByName(entityFilter, vm.pageSize, vm.nextPage).then(successCallback, failureCallback);
       }
 
@@ -132,16 +140,20 @@
         vm.entities.push(...response.data);
         vm.nextPage++;
         vm.noMoreEntitiesToGet = response.data.length === 0;
+        vm.showSpinner = false;
       }
 
       function failureCallback(error) {
         console.log("Failed to get MORE entities...", error);
+        vm.showSpinner = false;
       }
 
       if (vm.showName) {
         speciesSrvc.getSpeciesByName(vm.lastSearch, vm.pageSize, vm.nextPage).then(successCallback, failureCallback)
+        vm.showSpinner = true;
       } else if (vm.showPostcode) {
         sightingsSrvc.getSightingsByName(vm.lastSearch, vm.pageSize, vm.nextPage).then(successCallback, failureCallback);
+        vm.showSpinner = true;
       }
 
     }

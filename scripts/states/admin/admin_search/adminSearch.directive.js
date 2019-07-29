@@ -8,8 +8,9 @@
         return {
             restrict: "E",
             scope: {
-                search: "=",
-                placeholder: "@"
+                searchFunc: "=searchFunc",
+                placeholderText: "@placeholderText",
+                showSpinner: "=showSpinner"
             },
             templateUrl: "scripts/states/admin/admin_search/admin.search.template.html",
             controller: searchCtrl,
