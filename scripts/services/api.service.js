@@ -77,13 +77,6 @@
       }
     };
 
-    service.getAllRegisteredSpecies = function getAllRegisteredSpecies() {
-      return($http({
-        method: "GET",
-        url: service.baseDbUrl + "things/"
-      }));
-    };
-
     service.getSpeciesByName = function getSpeciesByName(speciesName, pageSize, pageNum) {
         let endpointUri = service.baseDbUrl
             + "things/?" + encodeURIComponent("$size") + "=" + encodeURIComponent( pageSize )
@@ -215,13 +208,6 @@
     var service = {};
 
     service.baseDbUrl = "https://urbanwilddbapi.herokuapp.com/";
-
-    service.getAllRegisteredSightings = function getAllRegisteredSightings () {
-      return($http({
-        method: "GET",
-        url: service.baseDbUrl + "events/"
-      }));
-    }
 
     service.getSightingsByName = function getSightingsByName(sightingsPostcode, pageSize, pageNum) {
       let endpointUri = service.baseDbUrl

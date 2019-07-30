@@ -89,7 +89,6 @@
         }
       } else if (vm.showPostcode) { // if on the delete sightings page
         for (let i = 0; i < vm.selectedEntities.length; i++) {
-          console.log(vm.selectedEntities[i].id);
           promiseArray.push(sightingsSrvc.deleteSightings(vm.selectedEntities[i].id));
         }
       }

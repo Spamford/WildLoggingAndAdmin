@@ -1,7 +1,7 @@
 <div class="admin-delete">
   <h3 style="text-align: center;">Delete {{vm.title}}</h3>
   <div class="container-fluid">
-    <search-bar show-spinner="vm.showSpinner" search-func="vm.getEntities" placeholder-text="Enter the {{vm.placeholderProperty}} of the {{vm.title}}"></search-bar>
+    <search-bar search-func="vm.getEntities" placeholder-text="Enter the {{vm.placeholderProperty}} of the {{vm.title}}"></search-bar>
     <div class="form-check">
       <input id="admin-check-all" class="form-check-input" type="checkbox" ng-model="vm.allSelected" ng-change="vm.selectAll()" />
       <label for="admin-check-all" class="form-check-label">Select All</label>

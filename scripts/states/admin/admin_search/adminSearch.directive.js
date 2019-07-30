@@ -9,8 +9,7 @@
             restrict: "E",
             scope: {
                 searchFunc: "=searchFunc",
-                placeholderText: "@placeholderText",
-                showSpinner: "=showSpinner"
+                placeholderText: "@placeholderText"
             },
             templateUrl: "scripts/states/admin/admin_search/admin.search.template.html",
             controller: searchCtrl,
@@ -25,6 +24,14 @@
 
     function searchCtrl() {
         var vm = angular.extend(this, {});
+
+        vm.handleEvent = function handleEvent(evt) {
+            let key = 'which' in evt ? evt.which : evt.keyCode;
+            if (key === 13) {
+                vm.searchFunc(vm.searchStr);
+            }
+        }
+
         return vm;
     }
 
