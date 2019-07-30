@@ -15,7 +15,7 @@
       <label style="cursor: pointer;" class="list-group-item" ng-repeat="entity in vm.entities">
         <input class="admin-check" type="checkbox" ng-checked="vm.allSelected" ng-click="vm.toggleSelection(entity)">
         <span ng-show="vm.showName">{{entity.name}}</span>
-        <span ng-show="vm.showPostcode">{{entity.postcode}}</span>
+        <span ng-show="vm.showPostcode">Saw a {{entity.speciesName}} at {{entity.postcode}}</span>
       </label>
     </div>
   </div>
