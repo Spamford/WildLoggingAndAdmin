@@ -70,7 +70,9 @@
       deleteEntities().then(
         function success(response) {
           vm.searching = false;
-          console.log("DELETE Successful : ", response);
+          angular.copy(vm.entities.diff(vm.selectedEntities), vm.entities);
+          angular.copy([], vm.selectedEntities);
+          return response;
         },
         function failure(error) {
           vm.searching = false;
@@ -80,7 +82,6 @@
     }
 
     function deleteEntities() {
-
       let promiseObj = $q.defer();
       let promiseArray = [];
 
@@ -163,6 +164,7 @@
 
     function displayMoreInfo() {
 
+      // https://gist.github.com/telekosmos/3b62a31a5c43f40849bb#gistcomment-1830283
       let uniqueSpeciesIDs = [...new Set(vm.entities.map(x => x.thing))];
 
       let alreadyFetchedSpecies = vm.entities.map((x) => {
@@ -194,7 +196,7 @@
         // Among the sightings fetched from the server, at least one of them is of a species that hasn't been requested from the server yet.
         getUniqueSpecies(uniqueSpeciesIDs.diff(vm.fetchedUniqueSpeciesIDs)).then(successCallback, failureCallback);
       } else {
-        // How are the names shown when the new species fetched from the server have a thing property that has already been fetched.
+        // The new sightings fetched from the server have a thing (species ID) property that has already been fetched which makes them duplicates.
         assignDuplicateSpeciesNames(alreadyFetchedSpecies)
       }
 
