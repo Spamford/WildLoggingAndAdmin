@@ -9,7 +9,8 @@
             restrict: "E",
             scope: {
                 searchFunc: "=searchFunc",
-                placeholderText: "@placeholderText"
+                placeholderText: "@placeholderText",
+                searching: "="
             },
             templateUrl: "scripts/states/admin/admin_search/admin.search.template.html",
             controller: searchCtrl,
