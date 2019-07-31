@@ -1,28 +1,27 @@
 (function () {
-  'use strict';
 
-  var app = angular.module('app.loginState');
-  
-  app.controller('loginCtrl', loginCtrl);
+    'use strict';
 
-  loginCtrl.$inject = [
-    '$state'
-  ];
+    var app = angular.module('app.loginState');
 
-  function loginCtrl(
-    $state
-  ) {
+    app.controller('loginCtrl', loginCtrl);
 
-    var vm = angular.extend(this, {
+    loginCtrl.$inject = [
+        '$state'
+    ];
 
-    });
+    function loginCtrl(
+        $state
+    ) {
 
-    vm.goToAdmin = function goToAdmin() {
-      $state.go('admin');
+        var vm = angular.extend(this, {});
+
+        vm.goToAdmin = function goToAdmin() {
+            $state.go('admin');
+        }
+
+        return vm;
+
     }
-
-    return vm;
-
-  }
 
 })();

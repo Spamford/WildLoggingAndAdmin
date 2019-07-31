@@ -1,20 +1,16 @@
 (function () {
-  'use strict';
 
-  var app = angular.module('app.aboutState');
-    
-  app.controller('aboutCtrl', aboutCtrl);
+    'use strict';
 
-  aboutCtrl.$inject = [
+    var app = angular.module('app.aboutState');
 
-  ];
+    app.controller('aboutCtrl', aboutCtrl);
 
-  function aboutCtrl(
+    aboutCtrl.$inject = [];
 
-  ) {
-    var vm = angular.extend(this, {});
+    function aboutCtrl() {
+        var vm = angular.extend(this, {});
+        return vm;
+    }
 
-		return vm;
-  }
-		
 })();
