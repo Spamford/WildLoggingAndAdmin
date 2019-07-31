@@ -53,9 +53,7 @@
       }
 
       // Update the select all checkbox
-      let checkall = document.getElementById('admin-check-all');
-      checkall.checked = vm.selectedEntities.length === vm.entities.length;
-      checkall.indeterminate = vm.selectedEntities.length > 0 && vm.selectedEntities.length < vm.entities.length;
+      document.getElementById('admin-check-all').checked = vm.selectedEntities.length === vm.entities.length;
 
     }
 
