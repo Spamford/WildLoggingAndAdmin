@@ -13,17 +13,17 @@
                 searching: "="
             },
             templateUrl: "scripts/states/admin/admin_search/admin.search.template.html",
-            controller: searchCtrl,
+            controller: searchBarCtrl,
             controllerAs: "vm",
             bindToController: true
         }
     });
 
-    app.controller('searchCtrl', searchCtrl);
+    app.controller('searchBarCtrl', searchBarCtrl);
 
-    searchCtrl.$inject = [];
+    searchBarCtrl.$inject = [];
 
-    function searchCtrl() {
+    function searchBarCtrl() {
         var vm = angular.extend(this, {});
 
         vm.handleEvent = function handleEvent(evt) {
