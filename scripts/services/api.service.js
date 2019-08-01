@@ -212,7 +212,7 @@
         parameters = addParameter( parameters, "thing", thingsReference );
       }
 
-      var endpointUri = service.baseDbUrl + "things/"
+      var endpointUri = service.baseDbUrl + "events/?"+parameters;
 
       //console.log( "sightingsSrvc.getSightings: getting  "+endpointUri );
 
