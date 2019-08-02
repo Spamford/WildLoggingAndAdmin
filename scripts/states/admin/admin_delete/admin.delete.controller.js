@@ -10,15 +10,19 @@
         '$state',
         '$q',
         'speciesSrvc',
-        'sightingsSrvc'
+        'sightingsSrvc',
+        'authService'
     ];
 
     function adminDelCtrl(
         $state,
         $q,
         speciesSrvc,
-        sightingsSrvc
+        sightingsSrvc,
+        authService
     ) {
+
+        if (!authService.isAuthenticated()) return;
 
         let vm = angular.extend(this, {
             title: capitalize($state.params.entity),

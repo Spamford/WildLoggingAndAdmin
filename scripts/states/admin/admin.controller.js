@@ -7,12 +7,16 @@
     app.controller('adminCtrl', adminCtrl);
 
     adminCtrl.$inject = [
-        '$state'
+        '$state',
+        'authService'
     ];
 
     function adminCtrl(
-        $state
+        $state,
+        authService
     ) {
+
+        if (!authService.isAuthenticated()) return;
 
         var vm = angular.extend(this, {});
 

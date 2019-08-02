@@ -20,13 +20,15 @@
     '$q',
     '$timeout',
     '$sce',
-    '$http'
+    '$http',
+    'authService'
   ];
   function speciesSrvc(
     $q,
     $timeout,
     $sce,
-    $http
+    $http,
+    authService
   ) {
     var service = {};
 
@@ -135,9 +137,15 @@
     };
 
     service.deleteSpecies = function deleteSpecies(speciesID) {
+      console.log("speciesSrvc.deleteSightings - Is Authenticated : ", authService.isAuthenticated());
+      console.log("speciesSrvc.deleteSightings - ID Token : ", authService.getIdToken());
       return($http({
         method: "DELETE",
-        url: service.baseDbUrl + "things/" + speciesID
+        url: service.baseDbUrl + "things/" + speciesID,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + authService.getIdToken()
+        }
       }));
     }
 
@@ -165,12 +173,14 @@
 /*    '$ionicPlatform', */
     '$q',
     '$timeout',
-    '$http'
+    '$http',
+    'authService'
   ];
   function sightingsSrvc(
     $q,
     $timeout,
-    $http
+    $http,
+    authService
   ) {
 
     var service = {};
@@ -245,9 +255,15 @@
     };
 
     service.deleteSightings = function deleteSightings(sightingsID) {
+      console.log("sightingsSrvc.deleteSightings - Is Authenticated : ", authService.isAuthenticated());
+      console.log("sightingsSrvc.deleteSightings - ID Token : ", authService.getIdToken());
       return($http({
         method: "DELETE",
-        url: service.baseDbUrl + "events/" + sightingsID
+        url: service.baseDbUrl + "events/" + sightingsID,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + authService.getIdToken()
+        }
       }));
     }
 
