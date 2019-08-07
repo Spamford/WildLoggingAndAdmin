@@ -2,7 +2,7 @@
 
   'use strict';
 
-  let app = angular.module('app.callbackState');
+  let app = angular.module('app.callbackState', []);
 
   app.config(function (
     $stateProvider
