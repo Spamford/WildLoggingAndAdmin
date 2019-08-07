@@ -137,14 +137,12 @@
     };
 
     service.deleteSpecies = function deleteSpecies(speciesID) {
-      console.log("speciesSrvc.deleteSightings - Is Authenticated : ", authService.isAuthenticated());
-      console.log("speciesSrvc.deleteSightings - ID Token : ", authService.getIdToken());
       return($http({
         method: "DELETE",
         url: service.baseDbUrl + "things/" + speciesID,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + authService.getIdToken()
+          "Authorization": "Bearer " + authService.getAccessToken()
         }
       }));
     }
@@ -255,14 +253,12 @@
     };
 
     service.deleteSightings = function deleteSightings(sightingsID) {
-      console.log("sightingsSrvc.deleteSightings - Is Authenticated : ", authService.isAuthenticated());
-      console.log("sightingsSrvc.deleteSightings - ID Token : ", authService.getIdToken());
       return($http({
         method: "DELETE",
         url: service.baseDbUrl + "events/" + sightingsID,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + authService.getIdToken()
+          "Authorization": "Bearer " + authService.getAccessToken()
         }
       }));
     }

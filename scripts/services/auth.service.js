@@ -31,9 +31,6 @@
     service.handleAuthentication = function handleAuthentication() {
       angularAuth0.parseHash(function (err, authResult) {
         if (authResult && authResult.accessToken && authResult.idToken) {
-          console.log("authService.handleAuthentication - authResult : ", authResult);
-          console.log("authService.handleAuthentication - authResult.accessToken : ", authResult.accessToken);
-          console.log("authService.handleAuthentication - authResult.idToken : ", authResult.idToken);
           service.localLogin(authResult);
           $state.go('admin');
         } else if (err) {
@@ -53,9 +50,6 @@
       expiresAt = (authResult.expiresIn * 1000) + new Date().getTime();
       accessToken = authResult.accessToken;
       idToken = authResult.idToken;
-      console.log("authService.localLogin - accessToken : ", accessToken);
-      console.log("authService.localLogin - idToken : ", idToken);
-      console.log("authService.localLogin - expiresAt : ", expiresAt);
     }
 
     service.renewTokens = function renewTokens() {

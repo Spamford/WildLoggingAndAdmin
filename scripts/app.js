@@ -39,8 +39,9 @@
             domain: CLIENT_CONFIG.AUTH0_DOMAIN,
             responseType: 'token id_token',
             redirectUri: CLIENT_CONFIG.AUTH0_CALLBACK_URL,
-            scope: CLIENT_CONFIG.AUTH0_REQUESTED_SCOPES
-          });
+            scope: CLIENT_CONFIG.AUTH0_REQUESTED_SCOPES,
+            audience: CLIENT_CONFIG.AUTH0_AUDIENCE
+        });
 
     });
 
