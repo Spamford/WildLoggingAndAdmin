@@ -63,7 +63,7 @@
             }
 
             // Update the select all checkbox
-            document.getElementById('admin-check-all').checked = vm.selectedEntities.length === vm.entities.length;
+            document.querySelector('#admin-check-all').checked = vm.selectedEntities.length === vm.entities.length;
 
         }
 
@@ -82,6 +82,7 @@
                     angular.copy(vm.entities.diff(vm.selectedEntities), vm.entities);
                     // Clear selected entities
                     angular.copy([], vm.selectedEntities);
+                    document.querySelector('#admin-check-all').checked = false;
                 },
                 function failure(error) {
                     vm.searching = false;

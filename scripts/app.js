@@ -1,6 +1,6 @@
 (function () {
 
-    "use strict"; 
+    'use strict'; 
 
     const app = angular.module('starter', [
         'auth0.auth0',
@@ -25,7 +25,7 @@
 
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
-            "https://www.itis.gov/**"
+            'https://www.itis.gov/**'
         ]);
 
         $locationProvider.hashPrefix('');
@@ -67,5 +67,17 @@
         });
 
     });
+
+    // This allows the nav links access to the authentication service,
+    // in order to toggle the login and admin links based on whether the user has logged in.
+    app.controller('appCtrl', appCtrl);
+    appCtrl.$inject = ['authService'];
+    function appCtrl(
+        authSrvc
+    ) {
+        let vm = angular.extend(this, {});
+        vm.auth = authSrvc;
+        return vm;
+    }
 
 })();

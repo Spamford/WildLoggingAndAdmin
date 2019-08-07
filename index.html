@@ -4,9 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>The Urban Wild</title>
-    <base href="/ubanwild_wild_logging_auth0_static/"> 
-    <link rel="manifest" href="manifest.json">
-
+    <base href="/WildLoggingAndAdmin/"> 
 
     <link href="css/style.css" rel="stylesheet"/>
 
@@ -95,15 +93,19 @@
         aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" ng-click="vm.goHome()" style="color: #fff">Wild Logging</a>
+      <a ui-sref-active="active" class="navbar-brand" ui-sref="home">Wild Logging</a>
 
       <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
+        <ul ng-controller="appCtrl as vm" class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a ui-sref-active="active" class="nav-link" ui-sref="home">Home </a>
+            <a ui-sref-active="active" class="nav-link" ui-sref="home">Home</a>
           </li>
           <li class="nav-item">
-            <a ui-sref-active="active" class="nav-link" ui-sref="login">Login</a>
+            <a ng-if="vm.auth.isAuthenticated()" ui-sref-active="active" class="nav-link" ui-sref="admin">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a ng-if="!vm.auth.isAuthenticated()" ui-sref-active="active" class="nav-link" ui-sref="login">Login</a>
+            <a ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()" class="nav-link" >Logout</a>
           </li>
           <li class="nav-item">
             <a ui-sref-active="active" class="nav-link" ui-sref="about">About</a>
