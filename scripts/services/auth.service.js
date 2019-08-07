@@ -32,7 +32,7 @@
       angularAuth0.parseHash(function (err, authResult) {
         if (authResult && authResult.accessToken && authResult.idToken) {
           service.localLogin(authResult);
-          $state.go('admin');
+          $state.go('callback');
         } else if (err) {
           $timeout(function () {
             $state.go('login');

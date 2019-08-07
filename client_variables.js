@@ -2,7 +2,7 @@ const CLIENT_CONFIG = {
   "AUTH0_CLIENT_ID":"Wjp8IumneHRsi22lz2g7mqpjgqgiTfwh",
   "AUTH0_DOMAIN":"myurbanwild.eu.auth0.com",
 
-  "AUTH0_CALLBACK_URL":"https://cmdt.github.io/WildLoggingAndAdmin/admin",
+  "AUTH0_CALLBACK_URL":"https://cmdt.github.io/WildLoggingAndAdmin/admin/auth",
   // "AUTH0_CALLBACK_URL":"http://localhost:5500/#/admin",
 
   "APP_SCHEME": "https", 

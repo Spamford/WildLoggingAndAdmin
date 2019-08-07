@@ -14,7 +14,8 @@
         'app.locations',
         'app.api',
         'app.loginState',
-        'app.adminState'
+        'app.adminState',
+        'app.callbackState'
     ]);
 
     app.config(function config(
@@ -54,13 +55,6 @@
             // result in the hash
             authService.handleAuthentication();
         }
-
-        // $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-        //     event.preventDefault();
-
-        //     $state.get('about').error = { code: 123, description: 'Exception stack trace' }
-        //     return $state.go('about');
-        // });
 
         $transitions.onSuccess({}, function () {
             $('.navbar-collapse').collapse('hide');
