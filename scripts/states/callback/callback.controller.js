@@ -18,7 +18,7 @@
   app.controller('callbackCtrl', callbackCtrl);
 
   callbackCtrl.$inject = [
-    $state
+    '$state'
   ];
 
   function callbackCtrl() {
