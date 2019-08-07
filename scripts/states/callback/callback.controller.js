@@ -21,7 +21,7 @@
     '$state'
   ];
 
-  function callbackCtrl() {
+  function callbackCtrl($state) {
     $state.go("admin");
   }
 
