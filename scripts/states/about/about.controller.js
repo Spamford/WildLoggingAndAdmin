@@ -1,28 +1,16 @@
 (function () {
-  'use strict';
 
-  angular
-		.module('app.aboutState')
-		.controller('aboutCtrl', aboutCtrl);
+    'use strict';
 
-  aboutCtrl.$inject = [
-	  '$scope',
-	  '$timeout',
-	  '$state'
-  ];
+    var app = angular.module('app.aboutState');
 
-  function aboutCtrl(
-    $scope,
-    $timeout,
-    $state
-  ) {
-    var vm = angular.extend(this, {});
-    //Controller below
-    vm.goHome = function goHome(){
-	    console.log("go home!");
-      $state.go('home');
+    app.controller('aboutCtrl', aboutCtrl);
+
+    aboutCtrl.$inject = [];
+
+    function aboutCtrl() {
+        var vm = angular.extend(this, {});
+        return vm;
     }
-		return vm;
-	}
-		
+
 })();

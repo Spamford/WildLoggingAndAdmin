@@ -7,12 +7,14 @@ angular.module('starter', [
 		'ui.router',
   	'ngAnimate',
   	'ui.bootstrap',
-  	'ui-notification',
-  	'app.homeState',
+    'ui-notification',
+    'app.homeState',
   	'app.searchState',
   	'app.aboutState',
   	'app.locations',
-  	'app.api'
+    'app.api',
+    'app.loginState',
+    'app.adminState'
 	])
   .config(function(
     $sceDelegateProvider,
@@ -35,13 +37,18 @@ angular.module('starter', [
 
 
   })
-  .run(function($state, $rootScope, Notification) {
+  .run(function($state, $rootScope, $transitions, Notification) {
 
     $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
       event.preventDefault();
 
       $state.get('about').error = { code: 123, description: 'Exception stack trace' }
       return $state.go('about');
-    }); 
+    });
+
+    $transitions.onSuccess({}, function() {
+      $('.navbar-collapse').collapse('hide');
+    });
+
   });
 

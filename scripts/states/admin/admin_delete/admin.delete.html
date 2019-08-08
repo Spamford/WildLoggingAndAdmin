@@ -1,0 +1,28 @@
+<div class="admin-delete">
+    <h3>Delete {{vm.title}}</h3>
+    <div class="container-fluid">
+        <search-bar search-func="vm.searchForEntities" placeholder-text="Enter the {{vm.placeholderProperty}} of the {{vm.title}}" searching="vm.searching"></search-bar>
+        <div class="form-check">
+            <input id="admin-check-all" class="form-check-input" type="checkbox" ng-model="vm.allSelected" ng-change="vm.selectAll()" />
+            <label for="admin-check-all" class="form-check-label">Select All</label>
+        </div>
+        <div class="list-group">
+            <label style="cursor: pointer;" class="list-group-item" ng-repeat="entity in vm.entities">
+                <input class="admin-check" type="checkbox" ng-checked="vm.allSelected" ng-click="vm.toggleSelection(entity)">
+                <span ng-show="vm.showName">{{entity.name}}</span>
+                <span ng-show="vm.showPostcode">Saw a {{entity.speciesName}} at {{entity.postcode}}</span>
+            </label>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-6">
+                <button ng-click="vm.getMoreEntities()" ng-disabled="vm.noMoreEntitiesToGet" class="btn btn-primary btn-block">More</button>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <button ng-click="vm.deleteSelectedEntities()" ng-disabled="!vm.selectedEntities.length" class="btn btn-danger btn-block">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

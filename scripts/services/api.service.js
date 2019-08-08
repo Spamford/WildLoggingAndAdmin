@@ -34,7 +34,6 @@
     service.corsProxyUrl = "https://cors-anywhere.herokuapp.com/";
     service.speciesApiUrl = "https://www.itis.gov/ITISWebService/jsonservice/searchForAnyMatch"
 
-
     // methods as per https://trello.com/c/3sLYXMgq/64-species-service
 
     service.getSuggestedSpeciesNames = function getSuggestedSpeciesNames( searchTerms ) {
@@ -76,6 +75,18 @@
         defer.resolve();
       }
     };
+
+    service.getSpeciesByName = function getSpeciesByName(speciesName, pageSize, pageNum) {
+        let endpointUri = service.baseDbUrl
+            + "things/?" + encodeURIComponent("$size") + "=" + encodeURIComponent( pageSize )
+            + "&name=" + encodeURIComponent( speciesName )
+            + "&" + encodeURIComponent("$page") + "=" + encodeURIComponent( pageNum );
+
+        return($http({
+            method: "GET",
+            url: endpointUri
+        }));
+    }
 
     service.getRegisteredSpecies = function getRegisteredSpecies( speciesName ) {
       var endpointUri = service.baseDbUrl + "things/?name="+encodeURIComponent( speciesName );
@@ -122,9 +133,28 @@
         )
       );
     };
+
+    service.deleteSpecies = function deleteSpecies(speciesID) {
+      return($http({
+        method: "DELETE",
+        url: service.baseDbUrl + "things/" + speciesID
+      }));
+    }
+
     return service;
+
   }
 
+
+
+
+
+
+
+
+
+
+  
   //
   //
   // sightingsSrvc
@@ -142,7 +172,22 @@
     $timeout,
     $http
   ) {
+
     var service = {};
+
+    service.baseDbUrl = "https://urbanwilddbapi.herokuapp.com/";
+
+    service.getSightingsByName = function getSightingsByName(sightingsPostcode, pageSize, pageNum) {
+      let endpointUri = service.baseDbUrl
+          + "events/?" + encodeURIComponent("$size") + "=" + encodeURIComponent( pageSize )
+          + "&postcode=" + encodeURIComponent( sightingsPostcode )
+          + "&" + encodeURIComponent("$page") + "=" + encodeURIComponent( pageNum );
+
+      return($http({
+          method: "GET",
+          url: endpointUri
+      }));
+    }
 
     service.getSightings = function getSightings( postcode, dateFrom, dateTo, thingsReference ) {
       // sightings are 'events'
@@ -167,7 +212,7 @@
         parameters = addParameter( parameters, "thing", thingsReference );
       }
 
-      var endpointUri = service.baseDbUrl + "things/"
+      var endpointUri = service.baseDbUrl + "events/?"+parameters;
 
       //console.log( "sightingsSrvc.getSightings: getting  "+endpointUri );
 
@@ -199,7 +244,13 @@
       return postcode;
     };
 
-    //
+    service.deleteSightings = function deleteSightings(sightingsID) {
+      return($http({
+        method: "DELETE",
+        url: service.baseDbUrl + "events/" + sightingsID
+      }));
+    }
+
     return service;
   }
 
