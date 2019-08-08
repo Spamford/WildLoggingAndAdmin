@@ -19,7 +19,7 @@
             location: ['$stateParams','locationsSrvc', function( $stateParams, locationsSrvc )  {
               return locationsSrvc.getLocation( $stateParams.postcode ).then(
                 function gotOkay( location ) {
-                  return location.data.result;
+                  return location.result;
                 },
                 function fail( err ) {
                   alert(err);

@@ -1,4 +1,10 @@
-<div class="home-page">
+<uiview>
+  <div id="header" class="bar-dark">
+    <button class="button button-icon icon ion-navicon" menu-toggle="left" ng-click="vm.goAbout()">❝</button>
+    <h1 class="title">Wild Logging</h1>
+    <button class="button button-icon icon ion-arrow-right-c" ng-click="vm.goSearch()">→</button>
+  </div>
+  <div class="home-page">
   <ng-form name="vm.homeForm">
     <div class="form-group">
       <label for="species">What did you see?</label>
@@ -68,11 +74,15 @@
         </div>
       </div>
       <div class="buttons">
-        <button class="btn btn-primary" ng-disabled="vm.searchItButtonDisabled"  ng-click="vm.handleSearchIt()">Search It!</button>
-        <button class="btn btn-success" ng-disabled="vm.logItButtonDisabled" ng-click="vm.handleLogIt()">Log It!</button>
+        <button class="btn" ng-disabled="vm.searchItButtonDisabled"  ng-click="vm.handleSearchIt()">Search It!</button>
+        <button class="btn" ng-disabled="vm.logItButtonDisabled" ng-click="vm.handleLogIt()">Log It!</button>
       </div>
       <div>
       </div>
     </div>
   </ng-form>
   </div>
+</uiview>
+
+
+

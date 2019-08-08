@@ -226,10 +226,10 @@
       // get the postcodes in this area
       vm.busy=true;
       locationsSrvc.locationToPostcode({latitude:centerLatLong.lat, longitude:centerLatLong.lng}, distance).then(
-        function gotPostcodeSet( response ){
+        function gotPostcodeSet( data ){
           var postcodes = [];
-          if ( response.data.result !== null ) {
-            postcodes = response.data.result.map( function(item, index){
+          if ( data.result !== null ) {
+            postcodes = data.result.map( function(item, index){
               //console.log(item);
               return item.postcode;
             },[]);
