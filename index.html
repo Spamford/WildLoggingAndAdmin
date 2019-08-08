@@ -75,48 +75,63 @@
     <script type="text/javascript" src="scripts/states/admin/admin_search/adminSearch.directive.js"></script>
     <script type="text/javascript" src="scripts/services/auth.service.js"></script>
 
+    <script type="text/javascript" src="scripts/states/callback/callback.controller.js"></script>
+
     <!-- angular-ui-notification -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-notification/0.3.6/angular-ui-notification.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-notification/0.3.6/angular-ui-notification.css"/>
 
   </head>
-  <body ng-app="starter" ng-cloak>
-    <connectionerror show="vm.errorModalShow">
-      modal connection error window
-      {{vm.errorModalText}}
-    </connectionerror>
+  <body>
 
-    <toaster-container></toaster-container>
+    <script>
+      (function () {
+        let redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
-        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a ui-sref-active="active" class="navbar-brand" ui-sref="home">Wild Logging</a>
-
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul ng-controller="appCtrl as vm" class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a ui-sref-active="active" class="nav-link" ui-sref="home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a ng-if="vm.auth.isAuthenticated()" ui-sref-active="active" class="nav-link" ui-sref="admin">Admin</a>
-          </li>
-          <li class="nav-item">
-            <a ng-if="!vm.auth.isAuthenticated()" ui-sref-active="active" class="nav-link" ui-sref="login">Login</a>
-            <a ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()" class="nav-link" >Logout</a>
-          </li>
-          <li class="nav-item">
-            <a ui-sref-active="active" class="nav-link" ui-sref="about">About</a>
-          </li>
-          <li class="nav-item">
-            <a ui-sref-active="active" class="nav-link" ui-sref="search">Map</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <ui-view>
-    </ui-view>
+    <div ng-app="starter" ng-cloak>
+      <connectionerror show="vm.errorModalShow">
+        modal connection error window
+        {{vm.errorModalText}}
+      </connectionerror>
+  
+      <toaster-container></toaster-container>
+  
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+          aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a ui-sref-active="active" class="navbar-brand" ui-sref="home">Wild Logging</a>
+  
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul ng-controller="appCtrl as vm" class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a ui-sref-active="active" class="nav-link" ui-sref="home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a ng-if="vm.auth.isAuthenticated()" ui-sref-active="active" class="nav-link" ui-sref="admin">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a ng-if="!vm.auth.isAuthenticated()" ui-sref-active="active" class="nav-link" ui-sref="login">Login</a>
+              <a ng-if="vm.auth.isAuthenticated()" ng-click="vm.auth.logout()" class="nav-link" >Logout</a>
+            </li>
+            <li class="nav-item">
+              <a ui-sref-active="active" class="nav-link" ui-sref="about">About</a>
+            </li>
+            <li class="nav-item">
+              <a ui-sref-active="active" class="nav-link" ui-sref="search">Map</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <ui-view>
+      </ui-view>
+    </div>
   </body>
 </html>
