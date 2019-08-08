@@ -19,8 +19,6 @@
         }
     });
 
-    app.controller('searchBarCtrl', searchBarCtrl);
-
     searchBarCtrl.$inject = [];
 
     function searchBarCtrl() {

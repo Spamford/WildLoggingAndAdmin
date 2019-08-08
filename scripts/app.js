@@ -1,54 +1,77 @@
-// Ionic Starter App
+(function () {
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('starter', [
-		'ui.router',
-  	'ngAnimate',
-  	'ui.bootstrap',
-    'ui-notification',
-    'app.homeState',
-  	'app.searchState',
-  	'app.aboutState',
-  	'app.locations',
-    'app.api',
-    'app.loginState',
-    'app.adminState'
-	])
-  .config(function(
-    $sceDelegateProvider,
-    $locationProvider
-    ){
+    'use strict'; 
 
-
-
-
-    $sceDelegateProvider.resourceUrlWhitelist([
-      'self',
-      "https://www.itis.gov/**"
+    const app = angular.module('starter', [
+        'auth0.auth0',
+        'ui.router',
+        'ngAnimate',
+        'ui.bootstrap',
+        'ui-notification',
+        'app.homeState',
+        'app.searchState',
+        'app.aboutState',
+        'app.locations',
+        'app.api',
+        'app.loginState',
+        'app.adminState',
+        'app.callbackState'
     ]);
 
-    $locationProvider.hashPrefix('');
+    app.config(function config(
+        $sceDelegateProvider,
+        $locationProvider,
+        angularAuth0Provider
+    )   {
 
-    /// Comment out the line below to run the app
-    // without HTML5 mode (will use hashes in routes)
-    $locationProvider.html5Mode(true);
+        $sceDelegateProvider.resourceUrlWhitelist([
+            'self',
+            'https://www.itis.gov/**'
+        ]);
 
+        $locationProvider.hashPrefix('');
 
-  })
-  .run(function($state, $rootScope, $transitions, Notification) {
+        /// Comment out the line below to run the app
+        // without HTML5 mode (will use hashes in routes)
+        $locationProvider.html5Mode(true);
 
-    $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
-      event.preventDefault();
+        angularAuth0Provider.init({
+            clientID: CLIENT_CONFIG.AUTH0_CLIENT_ID,
+            domain: CLIENT_CONFIG.AUTH0_DOMAIN,
+            responseType: 'token id_token',
+            redirectUri: CLIENT_CONFIG.AUTH0_CALLBACK_URL,
+            scope: CLIENT_CONFIG.AUTH0_REQUESTED_SCOPES,
+            audience: CLIENT_CONFIG.AUTH0_AUDIENCE
+        });
 
-      $state.get('about').error = { code: 123, description: 'Exception stack trace' }
-      return $state.go('about');
     });
 
-    $transitions.onSuccess({}, function() {
-      $('.navbar-collapse').collapse('hide');
+    app.run(function ($state, $rootScope, $transitions, authService) {
+
+        if (localStorage.getItem('isLoggedIn') === 'true') {
+            authService.renewTokens();
+        } else {
+            // Handle the authentication
+            // result in the hash
+            authService.handleAuthentication();
+        }
+
+        $transitions.onSuccess({}, function () {
+            $('.navbar-collapse').collapse('hide');
+        });
+
     });
 
-  });
+    // This allows the nav links access to the authentication service,
+    // in order to toggle the login and admin links based on whether the user has logged in.
+    app.controller('appCtrl', appCtrl);
+    appCtrl.$inject = ['authService'];
+    function appCtrl(
+        authSrvc
+    ) {
+        let vm = angular.extend(this, {});
+        vm.auth = authSrvc;
+        return vm;
+    }
 
+})();

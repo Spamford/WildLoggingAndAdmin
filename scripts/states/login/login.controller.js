@@ -7,18 +7,16 @@
     app.controller('loginCtrl', loginCtrl);
 
     loginCtrl.$inject = [
-        '$state'
+        'authService'
     ];
 
     function loginCtrl(
-        $state
+        authService
     ) {
 
         var vm = angular.extend(this, {});
 
-        vm.goToAdmin = function goToAdmin() {
-            $state.go('admin');
-        }
+        vm.auth = authService;
 
         return vm;
 
