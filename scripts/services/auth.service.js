@@ -37,7 +37,7 @@
           $timeout(function () {
             $state.go('login');
           });
-          console.log(error);
+          console.log(err);
           alert('Error: ' + err.error + '. Check the console for further details.');
         }
       });
@@ -58,7 +58,8 @@
           if (err) {
             console.log(err);
           } else {
-            localLogin(result);
+            service.localLogin(result);
+            $state.go("admin");
           }
         }
       );
